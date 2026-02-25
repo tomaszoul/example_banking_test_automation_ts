@@ -1,0 +1,37 @@
+{
+  "name": "banking-e2e-tests",
+  "version": "1.0.0",
+  "description": "Playwright E2E test suite for the Banking Project demo application",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=21.2.0"
+  },
+  "scripts": {
+    "test": "node run-tests.mjs",
+    "test:local": "node run-tests.mjs --local",
+    "test:smoke": "node run-tests.mjs",
+    "test:full": "node run-tests.mjs --full",
+    "test:local:smoke": "node run-tests.mjs --local",
+    "test:local:full": "node run-tests.mjs --local --full",
+    "test:headed": "node run-tests.mjs --headed",
+    "test:ui": "node run-tests.mjs --ui",
+    "test:ui:full": "node run-tests.mjs --full --ui",
+    "test:local:ui": "node run-tests.mjs --local --ui",
+    "test:local:ui:full": "node run-tests.mjs --local --full --ui",
+    "test:debug": "node run-tests.mjs --debug",
+    "test:report": "npx tsx e2e-tests/utils/reporting/run-tests.ts",
+    "test:report:open": "npx tsx e2e-tests/utils/reporting/run-tests.ts --open",
+    "report:publish": "npx tsx e2e-tests/utils/reporting/publish-report.ts",
+    "report:publish:dry": "npx tsx e2e-tests/utils/reporting/publish-report.ts --dry-run",
+    "app:start": "npx serve banking-app -l 8081",
+    "app:download": "node download-app.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "@types/node": "^20.0.0",
+    "serve": "^14.0.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.0"
+  }
+}
