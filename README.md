@@ -1,8 +1,11 @@
 # Banking E2E Test Suite
 
-Playwright end-to-end test suite for an AngularJS banking demo application. Tests cover customer login, account management, deposits, withdrawals, and transaction history.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Node](https://img.shields.io/badge/node-%3E%3D21.2-brightgreen)](https://nodejs.org)
 
-> **AI disclosure:** This project was built with the help of Claude (Opus 4.6) inside Curosr. The AI served as a coding assistant -- I directed the architecture, reviewed every change, like every line, and made the decisions. Also there was so much refactoring. It accelerated what would otherwise have been roughly a week of work into a much much shorter timeframe.
+Playwright end-to-end test suite for an [AngularJS banking demo](https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login) application. Tests cover customer login, account management, deposits, withdrawals, and transaction history.
+
+> **AI disclosure:** This project was built with the help of Claude (Opus 4.6) inside Cursor. The AI served as a coding assistant -- I directed the architecture, reviewed every change, like every line, and made the decisions. Also there was so much refactoring. It accelerated what would otherwise have been roughly a week of work into a much much shorter timeframe.
 
 ## Prerequisites
 
@@ -48,7 +51,7 @@ pnpm test --local          # or: npm test -- --local
 │   │   ├── locators/         # Centralized selector registry
 │   │   ├── pages/            # Page Object classes
 │   │   ├── helpers/          # Navigation, waits, assertions
-│   │   └── specs/            # Test specs (15 tests across 5 files)
+│   │   └── specs/            # Test specs (18 tests across 7 spec files)
 │   ├── utils/reporting/      # Report generation, retention, connectors
 │   ├── playwright.config.ts
 │   └── tsconfig.json

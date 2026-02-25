@@ -51,34 +51,39 @@ banking-e2e-tests/
 │           ├── locators/
 │           │   └── selectors.ts   # All element selectors, organized by page
 │           ├── pages/
-│       │   ├── LoginPage.ts
-│       │   ├── CustomerDashboardPage.ts
-│       │   ├── DepositPage.ts
-│       │   └── WithdrawPage.ts
-│       ├── helpers/
-│       │   ├── browser-helpers.ts   # Navigation, waitForAngular
-│       │   └── assert-helpers.ts    # expectVisible, expectBalanceChange
-│       └── specs/
-│           ├── customer-login.spec.ts       # 4 tests
-│           ├── account-balance.spec.ts      # 3 tests
-│           ├── deposit.spec.ts              # 3 tests
-│           ├── withdraw.spec.ts             # 2 tests
-│           └── transactions-list.spec.ts    # 3 tests
+│           │   ├── LoginPage.ts
+│           │   ├── CustomerDashboardPage.ts
+│           │   ├── DepositPage.ts
+│           │   ├── WithdrawPage.ts
+│           │   └── ManagerPage.ts
+│           ├── helpers/
+│           │   ├── browser-helpers.ts   # Navigation, waitForAngular
+│           │   └── assert-helpers.ts    # expectVisible, expectBalanceChange
+│           └── specs/
+│               ├── customer-login.spec.ts       # 2 tests
+│               ├── account-switching.spec.ts   # 5 tests
+│               ├── deposit.spec.ts             # 2 tests
+│               ├── withdraw.spec.ts            # 2 tests
+│               ├── transactions-list.spec.ts  # 2 tests
+│               ├── failing-deposit.spec.ts     # 1 test (intentional failure)
+│               └── manager-crud.spec.ts        # 4 tests
 ├── run-tests.mjs              # CLI wrapper: handles --local flag, spawns Playwright
 ├── download-app.mjs           # Utility: re-download the app (offline-safe)
 ├── package.json
 └── pnpm-lock.yaml
 ```
 
-## Test Coverage (15 tests)
+## Test Coverage (18 tests)
 
 | Spec File | Tests | What it covers |
 |---|---|---|
-| customer-login | 4 | Home page, login flow, dropdown users, logout |
-| account-balance | 3 | Welcome name, account details, account switching |
-| deposit | 3 | Deposit + balance update, button visibility, empty submit |
-| withdraw | 2 | Successful withdrawal, overdraft error |
-| transactions-list | 3 | Deposit appears in list, reset clears list, back navigation |
+| customer-login | 2 | Home page options, dropdown users, login/logout flow |
+| account-switching | 5 | Welcome name, account dropdown, currency switching, deposit isolation |
+| deposit | 2 | Deposit + balance update, empty/zero submit |
+| withdraw | 2 | Successful withdrawal, overdraft/empty/zero/negative rejection |
+| transactions-list | 2 | Deposit in list, reset clears list and back navigation |
+| failing-deposit | 1 | Intentional failure for report/trace validation |
+| manager-crud | 4 | Add customer, open account, list/filter, full CRUD flow |
 
 ## How to Run
 
@@ -110,7 +115,7 @@ banking-e2e-tests/
 
 | Mode | Command | Tests | Use when |
 |---|---|---|---|
-| **Smoke tests** | `pnpm test` or `pnpm test:smoke` | ~15 | Fast feedback, CI, daily development |
+| **Smoke tests** | `pnpm test` or `pnpm test:smoke` | ~18 | Fast feedback, CI, daily development |
 | **Full run** | `pnpm test:full` | ~75 | Every scenario × every user; pre-release, thorough validation |
 
 - **Smoke tests** run all scenarios once with a single customer (Harry Potter). Fast, minimal.
