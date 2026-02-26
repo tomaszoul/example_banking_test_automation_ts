@@ -19,10 +19,10 @@ test.describe('Transactions List', () => {
   })
 
   /**
-   * Navigates to the transactions list and ensures the AngularJS date filter
-   * is wide enough to show all transactions. On fast connections (localhost),
-   * the datetime-local input binding can nullify the filter dates before
-   * Angular finishes its digest, hiding rows that actually exist.
+   * Navigates to the transactions list and forces the AngularJS date filter
+   * wide enough to show all transactions (epoch → tomorrow). Without this,
+   * accounts with seed data (e.g. Hermoine) may auto-set a date range that
+   * excludes freshly-made deposits.
    */
   async function goToTransactions(page: Page) {
     await page.locator(CustomerDashboard.transactionsBtn).click()
@@ -37,9 +37,9 @@ test.describe('Transactions List', () => {
       if (!el) return
       let scope = ng.element(el).scope()
       while (scope && !scope.transactions) scope = scope.$parent
-      if (scope?.transactions?.length > 0 && !scope.startDate) {
+      if (scope?.transactions?.length > 0) {
         scope.startDate = new Date(0)
-        scope.end = new Date()
+        scope.end = new Date(Date.now() + 86_400_000)
         scope.$apply()
       }
     })
@@ -47,10 +47,7 @@ test.describe('Transactions List', () => {
   }
 
   /** Verifies the pre-deposit amount (500) appears in the transactions table. */
-  test('should show deposit entry on transactions page', async ({ page, bankUser }) => {
-    // Hermoine's account has 196 seed transactions; date filter can hide our 500 deposit
-    test.skip(bankUser.name === 'Hermoine Granger', 'Hermoine has seed transactions; date filter may hide our deposit')
-
+  test('should show deposit entry on transactions page', async ({ page }) => {
     await goToTransactions(page)
     const tableContent = await page.locator(TransactionsPage.table).textContent()
     expect(tableContent).toContain('500')
