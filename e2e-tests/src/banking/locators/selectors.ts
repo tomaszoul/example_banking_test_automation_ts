@@ -11,6 +11,7 @@
 /** Landing page — entry point with Customer / Manager login buttons. */
 export const HomePage = {
   heading: 'strong.mainHeading',
+  homeBtn: 'button[ng-click="home()"]',
   customerLoginBtn: 'button[ng-click="customer()"]',
   managerLoginBtn: 'button[ng-click="manager()"]',
 } as const

@@ -131,6 +131,14 @@ export class ManagerPage {
     return result
   }
 
+  /** Checks if any row in the customers table contains both first and last name. */
+  async hasCustomerInList(firstName: string, lastName: string): Promise<boolean> {
+    await this.page.waitForSelector(`${MP.customersTable} tbody tr`, { timeout: 5000 })
+    await waitForAngular(this.page)
+    const tableText = (await this.page.locator(MP.customersTable).textContent()) ?? ''
+    return tableText.includes(firstName) && tableText.includes(lastName)
+  }
+
   /**
    * Clicks Delete for the first row matching the given first and last name.
    * No alert is shown for delete.

@@ -49,6 +49,13 @@ export class LoginPage {
     await waitForAngular(this.page)
   }
 
+  /** Clicks the in-app Home button and waits for the landing page heading. */
+  async clickHome(): Promise<void> {
+    await this.page.locator(HomePage.homeBtn).click()
+    await waitForAngular(this.page)
+    await expect(this.page.locator(HomePage.heading)).toBeVisible()
+  }
+
   /** Full login flow in one call -- for tests that have bigger fish to fry. */
   async loginAsCustomer(name: string): Promise<void> {
     await this.goToHome()
